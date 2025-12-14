@@ -19,9 +19,12 @@ export const createAndecdote = async (newAndecdote) => {
   const response = await fetch(baseUrl, options)
  
   if (!response.ok) {
-    throw new Error('Failed to create Andecdote')
+    const errorData = await response.json()
+    console.log(errorData)
+    const errorMessage = errorData.error
+    throw new Error(errorMessage)
   }
- 
+
   return await response.json()
 }
 
